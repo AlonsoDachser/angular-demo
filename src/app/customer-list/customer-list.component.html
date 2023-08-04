@@ -1,0 +1,13 @@
+<h2>Customers</h2>
+
+<div *ngFor="let customer of Customers">
+
+    <h3>
+        {{ customer.name }}
+    </h3>
+
+    <button type="button" (click)="edit()">
+        Edit
+      </button>
+      
+</div>
