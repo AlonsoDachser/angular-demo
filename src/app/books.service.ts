@@ -18,4 +18,31 @@ export class BooksService {
   public createBook(book: {id:number, title:string, copys:number}){
     this.books.push(book);
   }
+  public editBook(book: {id:number, title:string, copys:number}){
+
+    const upd_obj = this.books.map(obj => {
+      if (obj.id == book.id) {
+       obj.title=book.title;
+       obj.copys=book.copys;
+      }
+      return obj;
+     })
+    
+  }
+  public deleteBook(book: {id:number, title:string, copys:number}){
+    console.log(book);
+   
+   
+   let f = this.books.filter(function deleteById(element, index, array) { 
+      console.log("element " + (element.id !== book.id))
+      return (element.id !== book.id); 
+    });
+
+    return f;
+    
+  }
+
+  
 }
+
+  
