@@ -1,41 +1,74 @@
-<div class="container" style="margin-top: 70px;">  
+<div class="container" style="margin-top: 70px;">    
+  <table class="table table-hover">
+    <tr>
+      <button *ngIf="!crear" class="btn btn-primary left" (click)="createButton()"> Crear</button>          
+    </tr>  
+    <tr *ngIf="crear">
+    <td>
+      <label for="id">ID</label>
+      <input [(ngModel)]="bookCreated.id" type="text" name="id" class="form-control" id="id" aria-describedby="idHelp" placeholder="Introduce el id">
+      <small id="idHelp" class="form-text text-muted">Introduce el id del Libro</small>
+    </td>
+    <td>
+      <label for="title">Book title</label>
+      <input [(ngModel)]="bookCreated.title" type="text" name="title" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Introduce el titulo del libro">
+      <small id="nameHelp" class="form-text text-muted">Introduce el titulo del Libro</small>      
+    </td>
+    <td>
+      <label for="copys">Book copys</label>
+        <input [(ngModel)]="bookCreated.copys" type="text" name="copys" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Introduce el numero de copias">
+      <small id="nameHelp" class="form-text text-muted">Introduce las copias del Libro</small>
+    </td>
+  </tr>   
+  <tr  *ngIf="crear">
+    <td colspan="3">
+      <button class="btn btn-primary" (click)="saveBook(this.bookCreated)"> Guardar</button>     
+      <button class="btn btn-primary" (click)="crear=!crear"> Cancelar</button>    
+    </td>            
+  </tr>  
+  </table>
+
   <table class="table table-hover">
       <thead>
         <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Email</th>          
+          <th>Id</th>
+          <th>Titulo</th>
+          <th>Copias</th>          
         </tr>
       </thead>
-      <tbody *ngFor="let book of books">        
-        <tr>
+      <tbody *ngFor="let book of books" class="tableRow">
+        <tr *ngIf="!book.isExpand">
           <td>{{ book.id }}</td>
           <td> {{ book.title }}</td>
-          <td> {{ book.copys }}
-            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-              Button with data-bs-target
-            </button>
-            <button class="btn btn-primary" (click)="editBook(book)"> Editar</button>          
+          <td> {{ book.copys }}           
+            <button class="btn btn-primary" (click)="book.isExpand = !book.isExpand"> Editar</button>          
             <button class="btn btn-primary" (click)="deleteBook(book)"> Eliminar</button>    
           </td>
           </tr>
-          <tr class="collapse">
+          <tr  *ngIf="book.isExpand">
             <td>
               <label for="id">ID</label>
-              <input [(ngModel)]="book.id" type="text" name="id" class="form-control" id="id" aria-describedby="idHelp" placeholder="Enter ID">
-              <small id="idHelp" class="form-text text-muted">Enter your book’s ID</small>
+              <input [(ngModel)]="book.id" type="text" name="id" class="form-control" id="id" aria-describedby="idHelp" placeholder="Introduce el id">
+              <small id="idHelp" class="form-text text-muted">Introduce el id del Libro</small>
             </td>
             <td>
               <label for="title">Book title</label>
-              <input [(ngModel)]="book.title" type="text" name="title" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter book´s title">
-              <small id="nameHelp" class="form-text text-muted">Enter book´s title</small>      
+              <input [(ngModel)]="book.title" type="text" name="title" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Introduce el titulo del libro">
+              <small id="nameHelp" class="form-text text-muted">Introduce el titulo del Libro</small>      
             </td>
             <td>
               <label for="copys">Book copys</label>
-              <input [(ngModel)]="book.copys" type="text" name="copys" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter books copys">
-              <small id="nameHelp" class="form-text text-muted">Enter book copys</small>
+              <input [(ngModel)]="book.copys" type="text" name="copys" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Introduce el numero de copias">
+              <small id="nameHelp" class="form-text text-muted">Introduce las copias del Libro</small>
             </td>
-          </tr>                
+          </tr>   
+          
+          <tr  *ngIf="book.isExpand">
+            <td colspan="3">
+              <button class="btn btn-primary" (click)="book.isExpand = !book.isExpand;editBook(book)"> Guardar</button>     
+              <button class="btn btn-primary" (click)="book.isExpand = !book.isExpand"> Cancelar</button>    
+            </td>            
+          </tr>  
       </tbody>
     </table>    
   </div>

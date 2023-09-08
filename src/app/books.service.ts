@@ -17,6 +17,7 @@ export class BooksService {
   }
   public createBook(book: {id:number, title:string, copys:number}){
     this.books.push(book);
+    return this.books;
   }
   public editBook(book: {id:number, title:string, copys:number}){
 
@@ -29,16 +30,14 @@ export class BooksService {
      })
     
   }
-  public deleteBook(book: {id:number, title:string, copys:number}){
-    console.log(book);
+  public deleteBook(book: {id:number, title:string, copys:number}){    
    
-   
-   let f = this.books.filter(function deleteById(element, index, array) { 
+   this.books = this.books.filter(function deleteById(element, index, array) { 
       console.log("element " + (element.id !== book.id))
       return (element.id !== book.id); 
     });
 
-    return f;
+    
     
   }
 
